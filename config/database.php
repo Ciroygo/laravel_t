@@ -1,6 +1,5 @@
 <?php
-
-// $db_config = get_db_config();
+$db_config = get_db_config();
 
 return [
 
@@ -15,10 +14,7 @@ return [
     |
     */
 
-
-    'default' => 'pgsql',
-
-    // 'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -60,16 +56,16 @@ return [
         ],
 
         'pgsql' => [
-            'driver' => 'pgsql',
-            'host' => $db_config['host'],,
-            'port' => $db_config['port'],
+            'driver'   => 'pgsql',
+            'host'     => $db_config['host'],
+            'port'     => env('DB_PORT', '5432'),
             'database' => $db_config['database'],
             'username' => $db_config['username'],
             'password' => $db_config['password'],
-            'charset' => 'utf8',
-            'prefix' => '',
-            'schema' => 'public',
-            'sslmode' => 'require',
+            'charset'  => 'utf8',
+            'prefix'   => '',
+            'schema'   => 'public',
+            'sslmode'  => 'prefer',
         ],
 
         'sqlsrv' => [
