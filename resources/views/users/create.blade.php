@@ -1,4 +1,4 @@
-@extends('layouts/deafult')
+@extends('layouts.deafult')
 
 
 @section('title','注册界面')

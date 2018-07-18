@@ -8,6 +8,12 @@ use Auth;
 class SessionsController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('guest', [
+            'only' => ['create']
+        ]);
+    }
 
     public function create()
     {
@@ -24,7 +30,7 @@ class SessionsController extends Controller
         if (Auth::attempt($credentials,$request->has('remember'))) {
             session()->flash('success', '登录成功');
 
-            return redirect()->route('users.show', [Auth::user()]);
+            return redirect()->intended(route('users.show', [Auth::user()]));
         }else{
 
             session()->flash('danger', "你的注册账号和密码有不对的地方，请确认后重新输入");
