@@ -28,9 +28,14 @@ class SessionsController extends Controller
         ]);
 
         if (Auth::attempt($credentials,$request->has('remember'))) {
-            session()->flash('success', '登录成功');
-
-            return redirect()->intended(route('users.show', [Auth::user()]));
+            if (Auth::user()->activated) {
+                session()->flash('success', '登录成功');
+                return redirect()->intended(route('users.show', [Auth::user()]));
+            } else {
+                Auth::logout();
+                session()->flash('success', '登录成功');
+                return redirect('/');
+            }
         }else{
 
             session()->flash('danger', "你的注册账号和密码有不对的地方，请确认后重新输入");
